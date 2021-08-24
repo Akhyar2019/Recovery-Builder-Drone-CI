@@ -48,11 +48,13 @@ repo init --depth=1 -u $MANIFEST
 repo sync
 repo sync
 git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
-cd $DT_PATH
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
 export ALLOW_MISSING_DEPENDENCIES=true
+export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+export LC_ALL="C"
+export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
 . build/envsetup.sh
 echo " source build/envsetup.sh done"
 lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
