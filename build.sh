@@ -37,30 +37,27 @@ tg_post_msg "<b>Recovery Compilation Started...</b>%0A<b>DATE : </b><code>$DATE<
 
 tg_post_msg "<b>===+++ Setting up Build Environment +++===</b>"
 echo " ===+++ Setting up Build Environment +++==="
-apt-get install openssh-server -y
-apt-get update --fix-missing
-apt-get install openssh-server -y
-mkdir ~/ofox && cd ~/ofox
+mkdir ~/OrangeFox_10
+cd ~/OrangeFox_10
+git clone https://gitlab.com/OrangeFox/sync.git # or, "git clone git@gitlab.com:OrangeFox/sync.git"
+cd ~/OrangeFox_10/sync
+./get_fox_10.sh ~/OrangeFox_10/fox_10.0
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-repo init --depth=1 -u $MANIFEST
-repo sync
-repo sync
-git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
+cd ~/OrangeFox_10/fox_10.0)
+mkdir -p device/sony
+cd device/sony
+git clone https://github.com/whatawurst/android_device_sony_poplar -b android-9.0 poplar
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
+cd ~/OrangeFox_10/fox_10.0)
+  source build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
-export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
-. build/envsetup.sh
-echo " source build/envsetup.sh done"
-lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
-echo " lunch omni_${DEVICE}-eng done"
-mka recoveryimage || abort " mka failed with exit status $?"
-echo " mka recoveryimage done"
+lunch omni_<device>-eng && mka recoveryimage
 
 # Upload zips & recovery.img (U can improvise lateron adding telegram support etc etc)
 tg_post_msg "<b>===+++ Uploading Recovery +++===</b>"
