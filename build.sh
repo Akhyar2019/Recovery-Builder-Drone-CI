@@ -34,12 +34,12 @@ tg_post_build() {
 
 # Send a notificaton to TG
 tg_post_msg "<b>Recovery Compilation Started...</b>%0A<b>DATE : </b><code>$DATE</code>%0A"
-cd ~/OrangeFox_10/fox_10.0)
-  source build/envsetup.sh
-export ALLOW_MISSING_DEPENDENCIES=true
-export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-export LC_ALL="C"
-lunch omni_<device>-eng && mka recoveryimage
+cd ~
+sudo apt install git aria2 -y
+git clone https://gitlab.com/OrangeFox/misc/scripts
+cd scripts
+sudo bash setup/android_build_env.sh
+sudo bash setup/install_android_sdk.sh
 
 tg_post_msg "<b>===+++ Setting up Build Environment +++===</b>"
 echo " ===+++ Setting up Build Environment +++==="
@@ -63,7 +63,7 @@ cd ~/OrangeFox_10/fox_10.0)
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
-lunch omni_<device>-eng && mka recoveryimage
+lunch omni_poplar-eng && mka recoveryimage
 
 # Upload zips & recovery.img (U can improvise lateron adding telegram support etc etc)
 tg_post_msg "<b>===+++ Uploading Recovery +++===</b>"
