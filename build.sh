@@ -34,6 +34,12 @@ tg_post_build() {
 
 # Send a notificaton to TG
 tg_post_msg "<b>Recovery Compilation Started...</b>%0A<b>DATE : </b><code>$DATE</code>%0A"
+cd ~/OrangeFox_10/fox_10.0)
+  source build/envsetup.sh
+export ALLOW_MISSING_DEPENDENCIES=true
+export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+export LC_ALL="C"
+lunch omni_<device>-eng && mka recoveryimage
 
 tg_post_msg "<b>===+++ Setting up Build Environment +++===</b>"
 echo " ===+++ Setting up Build Environment +++==="
