@@ -51,14 +51,14 @@ cd ~/OrangeFox_10/sync
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-cd ~/OrangeFox_10/fox_10.0)
+cd ~/OrangeFox_10/fox_10.0
 mkdir -p device/sony
 cd device/sony
 git clone https://github.com/whatawurst/android_device_sony_poplar -b android-9.0 poplar
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
-cd ~/OrangeFox_10/fox_10.0)
+cd ~/OrangeFox_10/fox_10.0
   source build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
